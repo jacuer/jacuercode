@@ -20,7 +20,7 @@ abstract class Model{
 
 
     public function __construct() {
-        require_once 'Credentials.php';
+        require_once '../../Credentials.php';
         $credentials = new Credentials();
 
         $this->db_host = $credentials->getHost();
