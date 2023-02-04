@@ -1,5 +1,7 @@
 <?php
 
+<?php
+
 abstract class Model{
    
  private $db_host;
@@ -49,23 +51,23 @@ abstract class Model{
 
  
     protected function set_query(){
-        $this->db_open();
-        $this->conn->query($this->query);
+        $this->db_connect();
+        $stmt = $this->conn->prepare($this->query);
+        $stmt->execute();
+        $stmt->close();
         $this->db_close();
-        
     }
-    
-    
+
     protected function get_query(){
         $this->db_open();
-        
-        $result = $this->conn->query($this->query);
-       
-        while( $this->rows[] = $result->fetch_assoc() );
-        $result->close(); 
-
-        return array_pop($this->rows);
+        $stmt = $this->conn->prepare($this->query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($this->rows[] = $result->fetch_assoc());
+        $result->close();
+        $stmt->close();
         $this->db_close();
+        return array_pop($this->rows);
     }
         
 
