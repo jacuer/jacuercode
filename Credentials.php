@@ -4,7 +4,7 @@ class Credentials {
     private static $db_host = "localhost";
     private static $db_user = "root";
     private static $db_pass = "";
-    private static $db_name = "votaciones";
+    private static $db_name = "";
 
     public static function getHost() {
         return self::$db_host;
